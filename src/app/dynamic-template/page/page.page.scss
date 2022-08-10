@@ -1,0 +1,31 @@
+ion-header{
+    --ion-background-color: #005FAC;
+    background-color: #005FAC;
+  }
+  
+  .primary-background-color{
+    --background: #005FAC;
+  }
+  
+  
+  .std-margin {
+      margin:  15px 20px 30px 20px;
+  }
+  
+  .logo-margin {
+      margin:  10px 5px 5px 15px;
+    }
+  
+  .loading-image {
+      position: absolute;
+      width: 100%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -70%);
+      text-align: center;
+      color: gray;
+  }
+  
+  
+  .inner-html {
+  }

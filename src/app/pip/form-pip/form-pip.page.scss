@@ -1,0 +1,20 @@
+ion-header{
+    --ion-background-color: #1c98ed;
+    background-color: #1c98ed;
+    }
+    
+    .icon-header{
+    padding: 5px;
+    font-size: 35px;
+    color: white;
+    }
+    
+    .loading-image {
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -70%);
+    text-align: center;
+    color: gray;
+    }

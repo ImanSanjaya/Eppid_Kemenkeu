@@ -1,0 +1,156 @@
+<div *ngIf="!loading" class="loading-image" >
+  <ion-row>
+    <ion-col>
+        <img src="assets/escalade.gif" alt="Loading.." height="250px" />
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+        Mohon menunggu
+    </ion-col>
+  </ion-row>
+</div>
+
+<ion-header *ngIf="loading">
+  <table width=100%>
+    <tr>
+      <td><ion-icon class="icon-header" name="arrow-back" (click)="goBack()"></ion-icon></td>
+      <td><label style="font-size: large;color: white;"><b>Buat Pengajuan Keberatan</b></label></td>
+    </tr>
+  </table>
+</ion-header>
+
+<ion-content *ngIf="loading">
+	<div style="background-color:white;text-align: left;">
+    <br>
+    <label style="font-size: large;color: black;padding: 10px;"><b>Isi Data Informasi Keberatan</b></label>
+    <br><br>
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Keberatan Atas <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select interface="action-sheet" [(ngModel)]="keberatan.KeberatanAtas" (ngModelChange)="selectKeberatanAtas(keberatan.KeberatanAtas)" [ngModelOptions]="{standalone: true}">
+        <ion-select-option [value]="0">--Pilih Permohonan--</ion-select-option>
+        <ion-select-option [value]="opt.PermohonanId" *ngFor="let opt of permohonanPadaKeberatan">{{opt.IsiPermohonan}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div *ngIf="loadOptionKeberatanAtas">
+      <ion-item>
+        <ion-label position="stacked">Atasan PPID Tujuan <ion-text color="danger">*</ion-text></ion-label>
+        <ion-select interface="action-sheet" [(ngModel)]="keberatan.KodeUnit" [ngModelOptions]="{standalone: true}" value="{{keberatan.KodeUnit}}" [disabled]="true">
+          <ion-select-option [value]="opt.KodeUnit" *ngFor="let opt of unitKerja">{{opt.NamaUnit}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+    <div *ngIf="!loadOptionKeberatanAtas">
+      <ion-item>
+        <ion-label position="stacked">Atasan PPID Tujuan <ion-text color="danger">*</ion-text></ion-label>
+        <ion-select interface="action-sheet" [(ngModel)]="keberatan.KodeUnit" [ngModelOptions]="{standalone: true}" value="{{keberatan.KodeUnit}}">
+          <ion-select-option [value]="opt.KodeUnit" *ngFor="let opt of unitKerja">{{opt.NamaUnit}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+    <ion-item>
+      <ion-checkbox color="dark" (ionChange)="setLoadKuasaData()" slot="start"></ion-checkbox>
+      <ion-label>Dikuasakan</ion-label>
+    </ion-item>
+
+    <div *ngIf="loadKuasaData">
+      <div style="background-color:white;">
+        <br>
+        <label style="font-size: large;color: black;padding: 10px;"><b>Informasi Penerima Kuasa </b></label>
+        <br><br>
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Nama <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input [(ngModel)]="keberatan.NamaKuasa" [ngModelOptions]="{standalone: true}" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">NIK <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="number" required (keyup)="onLengthNIK($event)" [(ngModel)]="keberatan.NIKKuasa" [ngModelOptions]="{standalone: true}" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Telepon/Email <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input [(ngModel)]="keberatan.TeleponFaxEmailKuasa" [ngModelOptions]="{standalone: true}" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Alamat <ion-text color="danger">*</ion-text></ion-label>
+        <ion-textarea [(ngModel)]="keberatan.AlamatKuasa" [ngModelOptions]="{standalone: true}" ></ion-textarea>
+      </ion-item>
+      <br>
+      <ion-item>
+        <div>
+          <label style="font-size: medium;color: black;">Surat Kuasa <ion-text color="danger">*</ion-text></label><label style="font-size: small;color: lightslategrey;"> (jpeg, jpg, png, pdf, doc, docx; maks 10MB)</label>
+          <br><br>
+          <ion-input type="file" (change)="setFileSuratKuasa($event)"></ion-input>
+          <br>
+        </div>
+      </ion-item>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked">Alasan Pengajuan Keberatan<ion-text color="danger">*</ion-text></ion-label>
+      <ion-select interface="action-sheet" [(ngModel)]="keberatan.AlasanPengajuanKeberatan" [ngModelOptions]="{standalone: true}">
+        <ion-select-option value="Permohonan Informasi ditolak">Permohonan Informasi ditolak</ion-select-option>
+        <ion-select-option value="Informasi berkala tidak disediakan">Informasi berkala tidak disediakan</ion-select-option>
+        <ion-select-option value="Permintaan informasi tidak ditanggapi">Permintaan informasi tidak ditanggapi</ion-select-option>
+        <ion-select-option value="Permintaan informasi ditanggapi tidak sebagaimana yang diminta">Permintaan informasi ditanggapi tidak sebagaimana yang diminta</ion-select-option>
+        <ion-select-option value="Permintaan informasi tidak dipenuhi">Permintaan informasi tidak dipenuhi</ion-select-option>
+        <ion-select-option value="Biaya yang dikenakan tidak wajar">Biaya yang dikenakan tidak wajar</ion-select-option>
+        <ion-select-option value="Informasi disampaikan melebihi jangka waktu yang ditentukan">Informasi disampaikan melebihi jangka waktu yang ditentukan</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Kasus Posisi</ion-label>
+      <ion-textarea [(ngModel)]="keberatan.KasusPosisi" [ngModelOptions]="{standalone: true}">
+      </ion-textarea>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-label position="stacked">Jalur Komunikasi <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select interface="action-sheet" [(ngModel)]="keberatan.JalurKomunikasi" [ngModelOptions]="{standalone: true}">
+        <ion-select-option [value]="opt" *ngFor="let opt of caraMendapatkan">{{opt}}</ion-select-option>
+      </ion-select>
+    </ion-item> -->
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <div style="background-color:white;">
+        <br>
+        <label style="font-size: large;color: black;padding: 10px;"><b>Upload File Pelengkap</b></label>
+        <br><br>
+      </div>
+    </ion-row>
+    <ion-row>
+      <ion-list>
+        <ion-item lines="none">
+          <div>
+            <label style="font-size: medium;color: black;">File Identitas <ion-text color="danger">*</ion-text></label><label style="font-size: small;color: lightslategrey;"> (jpeg, jpg, png, pdf; maks. 10MB)</label>
+            <br><br>
+            <ion-input type="file" (change)="setFileIdentitas($event)"></ion-input>
+            <br>
+          </div>
+        </ion-item>  
+        <ion-item lines="none">
+          <div>
+            <label style="font-size: medium;color: black;">File Pendukung </label><label style="font-size: small;color: lightslategrey;">(jpeg, jpg, png, pdf, doc, docx; maks 10MB)</label>
+            <br><br>
+            <ion-input type="file"  (change)="setFilePendukung($event)"></ion-input>
+            <br>
+          </div>
+        </ion-item>  
+      </ion-list>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+    
+<ion-footer no-border *ngIf="loading">
+	<section class="full-width">
+	  <ion-card expand="block" (click)="submit()">
+		<div style="background-color:#fcb813ff;text-align: center;">
+		  <br>
+		  <label style="font-size: small;color: white;"><b><ion-icon slot="start" name="checkmark-circle-outline"></ion-icon> Ajukan</b></label>
+		  <br><br>
+		</div>
+	  </ion-card>
+	</section>
+  </ion-footer>

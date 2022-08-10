@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar class="primary-background-color">
+    <ion-buttons slot="end">
+    <ion-menu-button style="color: whitesmoke;"></ion-menu-button>
+    </ion-buttons>
+    <img src="assets/logo-kemenkeu-putih.png" class="logo-margin" height="60px" />
+  </ion-toolbar>
+  <br>
+</ion-header>
+
+<ion-content>
+	<div *ngIf="!loading" class="loading-image" >
+		<ion-row>
+		  <ion-col>
+			  <img src="assets/escalade.gif" alt="Loading.." height="250px" />
+		  </ion-col>
+		</ion-row>
+		<ion-row>
+		  <ion-col>
+			  Mohon menunggu.. <br/>kami sedang mengambil konten dari server
+		  </ion-col>
+		</ion-row>
+	</div>
+	<div *ngIf="loading">
+		<ion-card>
+			<ion-item>
+			<ion-item> 
+				<ion-icon style="color: black;" name="person" slot="start"></ion-icon>
+				<ion-label style="color: black;"><b>Biodata</b></ion-label>
+			</ion-item>
+			</ion-item>
+		
+			<ion-card-content style="text-align: left;">
+		
+			<ion-grid>
+				<ion-row *ngFor="let key of keysBiodata">
+				<ion-col>
+					<span style="color: black;">{{ key.title }}</span>
+					<br>
+					{{ biodata[key.key] }}
+					<hr style="height:1px;color:gray;background-color:gray">
+				</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<section class="full-width">
+							<ion-card expand="block" (click)="ResetPassword()">
+							  <div style="background-color:red;text-align: center;height: 60px;">
+								<br>
+								<label style="font-size: small;color: white;"><b>Ubah Password</b></label>
+								<br><br>
+							  </div>
+							</ion-card>
+						</section>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		
+			</ion-card-content>
+		</ion-card>
+	</div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+
+	<section class="full-width">
+		<ion-card expand="block" routerLink="/change-data-account" routerDirection="forward">
+			<div style="background-color:#005FAC;text-align: center;">
+			<br>
+			<label style="font-size: small;color: white;"><b>Ubah Data</b></label>
+			<br><br>
+			</div>
+		</ion-card>
+	</section>
+	
+</ion-footer>

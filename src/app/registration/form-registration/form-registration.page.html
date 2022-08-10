@@ -1,0 +1,71 @@
+<ion-header>
+  <table width=100%>
+    <tr>
+      <td><ion-icon class="icon-header" name="arrow-back" routerLink="/login" routerDirection="backward"></ion-icon></td>
+    </tr>
+  </table>
+</ion-header>
+
+<ion-content>
+  <br>
+  <div style="background-color:#ffff;text-align: left;">
+    &nbsp;&nbsp;&nbsp;<label style="font-size: xx-large;color: #005FAC;"><b>Buat Akun</b></label>
+    <br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<label style="font-size: small;color: black;"><b>Isi Data Dengan Identitas Anda</b></label>
+    <ion-item>
+      <ion-label position="stacked">Nama Lengkap <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required [(ngModel)]="registrasi.Nama" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">No KTP <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input type="number" required (keyup)="onLengthNIK($event)" [(ngModel)]="registrasi.NIKPemohon[0].NIK" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">NPWP</ion-label>
+      <ion-input [(ngModel)]="registrasi.NPWP" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Pekerjaan <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required [(ngModel)]="registrasi.Pekerjaan" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Alamat <ion-text color="danger">*</ion-text></ion-label>
+      <ion-textarea required [(ngModel)]="registrasi.Alamat" [ngModelOptions]="{standalone: true}"
+      ></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Telepon <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input type="number" required [(ngModel)]="registrasi.Telp" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+  </div>
+  <br>
+  <div style="background-color:#ffff; text-align: left;">
+    &nbsp;&nbsp;&nbsp;<label style="font-size: small;color: gray;">Pastikan Anda mengisi alamat email dengan benar.<br> &nbsp;&nbsp;&nbsp;&nbsp;Email tersebut akan menjadi saluran komunikasi<br> &nbsp;&nbsp;&nbsp;&nbsp;Anda dengan PPID Kementerian Keuangan</label>
+    <br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<label style="font-size: small;color: black;"><b>Isi data otentikasi anda</b></label>
+    <ion-item>
+      <ion-label position="stacked">Email <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required type="email" [(ngModel)]="registrasi.Email" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Password <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required type="password" [(ngModel)]="registrasi.PasswordPlain" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Ketik Ulang Password <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required type="password" [(ngModel)]="passwordComfirmation" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+  </div>
+</ion-content>
+    
+<ion-footer no-border>
+  <section class="full-width">
+    <ion-card expand="block" (click)="submit()">
+      <div style="background-color:#005FAC;text-align: center;">
+        <br>
+        <label style="font-size: small;color: white;"><b>Daftar</b></label>
+        <br><br>
+      </div>
+    </ion-card>
+  </section>
+</ion-footer>

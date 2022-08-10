@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar class="primary-background-color">
+      <ion-buttons slot="end">
+      <ion-menu-button style="color: whitesmoke;"></ion-menu-button>
+      </ion-buttons>
+      <img src="assets/logo-kemenkeu-putih.png" class="logo-margin" height="60px" />
+  </ion-toolbar>
+  <br>
+  <ion-row>
+    <label style="font-size: 20px;color: blanchedalmond;">&nbsp; Menu <b>Pilihan</b></label>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+        <ion-card class="special-card" routerLink="/form-biodata-pip" routerDirection="forward">
+          <img src="/assets/icon/Permohonan-Informasi-Publik.png" />
+        </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card class="special-card" routerLink="/form-biodata-pk" routerDirection="forward">
+        <img src="/assets/icon/Pengajuan-Keberatan.png" />
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-header>
+<img src="/assets/curve-header-bottom.png" />
+<ion-content> 
+<ion-grid>
+  <ion-row>
+    <label style="font-size: 20px;">&nbsp;<b>Menu Lainnya</b></label>
+  </ion-row>
+</ion-grid>
+
+<ion-grid>
+  <ion-row>
+    <img class="img-menu-lainnnya-margin" src="/assets/icon/line.png" />
+  </ion-row>
+  <ion-row>
+    <table width=100%>
+      <tr>
+        <td width=20%>&nbsp;&nbsp;&nbsp;&nbsp;<img class="img-menu-lainnnya-margin" height="30" src="/assets/icon/profil-ppid.png" /></td>
+        <td><label routerLink="/menu-profil-ppid" routerDirection="forward" style="font-size: large;color: black;">Profil PPID</label></td>
+      </tr>
+    </table>
+  </ion-row>
+  <ion-row>
+    <img class="img-menu-lainnnya-margin" src="/assets/icon/line.png" />
+  </ion-row>
+
+  <ion-row>
+    <table width=100%>
+      <tr>
+        <td width=20%>&nbsp;&nbsp;&nbsp;&nbsp;<img class="img-menu-lainnnya-margin" height="30" src="/assets/icon/informasi-publik.png" /></td>
+        <td><label routerLink="/menu-informasi-publik" routerDirection="forward" style="font-size: large;color: black;">Informasi Publik</label></td>
+      </tr>
+    </table>
+  </ion-row>
+  <ion-row>
+    <img class="img-menu-lainnnya-margin" src="/assets/icon/line.png" />
+  </ion-row>
+
+  <ion-row>
+    <table width=100%>
+      <tr>
+        <td width=20%>&nbsp;&nbsp;&nbsp;&nbsp;<img class="img-menu-lainnnya-margin" height="30" src="/assets/icon/standar-layanan.png" /></td>
+        <td><label routerLink="/menu-standar-layanan" routerDirection="forward" style="font-size: large;color: black;">Standar Layanan</label></td>
+      </tr>
+    </table>
+  </ion-row>
+  <ion-row>
+    <img class="img-menu-lainnnya-margin" src="/assets/icon/line.png" />
+  </ion-row>
+</ion-grid>
+  
+</ion-content>
+    
+<ion-footer no-border>
+
+  <p style="text-align: center;">
+    <label style="font-size: 10px;"><b>Hubungi Kami</b></label>
+    <br>
+    <label style="font-size: 10px;">021 - 3861489</label>
+    <br>
+    <label style="font-size: 10px;">ppid.kemenkeu@kemenkeu.go.id</label>
+  </p>
+  
+  <br><br><br>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button routerLink="/home" routerDirection="forward">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Beranda</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button routerLink="/all" routerDirection="forward">
+        <ion-icon name="list"></ion-icon>
+        <ion-label>Riwayat</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button *ngIf="!isLogin()" routerLink="/login" routerDirection="forward">
+        <ion-icon name="log-in"></ion-icon>
+        <ion-label>Login</ion-label>
+      </ion-tab-button>
+      <ion-tab-button *ngIf="isLogin()" routerLink="/view-account" routerDirection="forward">
+        <ion-icon name="person"></ion-icon>
+        <ion-label>Akun</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+
+</ion-footer>

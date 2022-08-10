@@ -1,0 +1,100 @@
+<div *ngIf="!loading" class="loading-image" >
+  <ion-row>
+    <ion-col>
+        <img src="assets/escalade.gif" alt="Loading.." height="250px" />
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+        Mohon menunggu.. <br/>kami sedang mengambil konten dari server
+    </ion-col>
+  </ion-row>
+</div>
+
+<ion-header *ngIf="loading">
+  <table width=100%>
+    <tr>
+      <td><ion-icon class="icon-header" name="arrow-back" (click)="goBack()"></ion-icon></td>
+      <td><label style="font-size: large;color: white;"><b>Buat Permohonan Informasi</b></label></td>
+    </tr>
+  </table>
+</ion-header>
+
+<ion-content *ngIf="loading">
+	<div style="background-color:white;">
+		<br>
+		<label style="font-size: large;color: black;padding: 10px;"><b>Data Pemohon</b></label>
+		<br><br>
+	</div>
+	<ion-item>
+		<ion-label position="stacked">Nama Lengkap <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input [(ngModel)]="biodata.Nama" [ngModelOptions]="{standalone: true}" readonly></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="stacked">No KTP <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input [(ngModel)]="biodata.NIK" [ngModelOptions]="{standalone: true}" readonly></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="stacked">NPWP </ion-label>
+		<ion-input [(ngModel)]="biodata.NPWP" [ngModelOptions]="{standalone: true}" readonly></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="stacked">Pekerjaan <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input [(ngModel)]="biodata.Pekerjaan" [ngModelOptions]="{standalone: true}" readonly></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="stacked">No Telepon <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input [(ngModel)]="biodata.Telp" [ngModelOptions]="{standalone: true}" readonly></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="stacked">Email <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input [(ngModel)]="biodata.Email" [ngModelOptions]="{standalone: true}" readonly></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="stacked">Alamat <ion-text color="danger">*</ion-text></ion-label>
+		<ion-textarea [(ngModel)]="biodata.Alamat" [ngModelOptions]="{standalone: true}" readonly></ion-textarea>
+	</ion-item>
+</ion-content>
+    
+<ion-footer no-border *ngIf="loading">
+  <section class="full-width">
+    <ion-card expand="block" routerLink="/form-pip" routerDirection="forward">
+      <div style="background-color:#1c98ed;text-align: center;">
+        <br>
+        <label style="font-size: small;color: white;"><b>Selanjutnya</b></label>
+        <br><br>
+      </div>
+    </ion-card>
+  </section>
+</ion-footer>
+
+
+<!-- Menu Dibawah Jika User Belum Login -->
+
+<ion-header *ngIf="!isLogin()">
+	<table width=100%>
+	  <tr>
+		<td><ion-icon class="icon-header" name="arrow-back" (click)="goBack()"></ion-icon></td>
+	  </tr>
+	</table>
+  </ion-header>
+  
+  <ion-content *ngIf="!isLogin()">
+	<div style="text-align: center;">
+	  <br><br><br><br>
+	  <label style="font-size: small;color: black;"><b>Untuk Melakukan Pengajuan Permohonan Informasi <br> Anda Harus Login terlebih dahulu</b></label>
+	  <br><br>
+	</div>
+  </ion-content>
+	  
+  <ion-footer no-border *ngIf="!isLogin()">
+	<section class="full-width">
+	  <ion-card expand="block" routerLink="/login" routerDirection="forward">
+		<div style="background-color:#1c98ed;text-align: center;">
+		  <br>
+		  <label style="font-size: small;color: white;"><b>Login</b></label>
+		  <br><br>
+		</div>
+	  </ion-card>
+	</section>
+  </ion-footer>

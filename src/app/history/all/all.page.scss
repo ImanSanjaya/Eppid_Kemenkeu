@@ -1,0 +1,34 @@
+ion-header{
+    --ion-background-color: #005FAC;
+    background-color: #005FAC;
+  }
+  
+  .loading-image {
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -70%);
+    text-align: center;
+    color: gray;
+  }
+  
+  .primary-background-color{
+    --background: #005FAC;
+  }
+  
+  .logo-margin {
+    margin:  10px 5px 5px 15px;
+  }
+  
+  .my-label {
+    font-size: 12px;
+    text-transform: capitalize
+  }
+  
+  .special-card {
+    padding: 5px;
+    width: 100%;
+    font-size: 9px;
+    background: white;
+  }

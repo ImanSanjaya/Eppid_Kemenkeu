@@ -1,0 +1,40 @@
+<ion-header>
+  <table width=100px>
+    <tr>
+      <td><ion-icon class="icon-header" name="arrow-back" routerLink="/home" routerDirection="backward"></ion-icon></td>
+    </tr>
+  </table>
+</ion-header>
+<br><br><br><br><br>
+<ion-content>
+  <form (ngSubmit)="doLogin()">
+  <div style="background-color:#ffff;">
+    &nbsp;&nbsp;&nbsp;&nbsp;<label style="font-size: xx-large;color: #005FAC;"><b>Login</b></label>
+    <br><br>
+    <br>
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input required type="email" [(ngModel)]="form.email" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input required type="password" [(ngModel)]="form.password" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+    <ion-button expand="block" style="float: center; margin-top: 25px;" type="submit">
+      <ion-icon slot="end" name="key"></ion-icon>
+        Login
+      </ion-button>
+      <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<label style="color: blue;" routerLink="/reset-password" routerDirection="forward">Lupa Password?</label>
+  </div>
+  </form>
+</ion-content>
+
+<ion-footer no-border>
+  <section class="full-width">
+    <div style="background-color:#ffff;text-align: center;">
+      <label style="color: black;">Belum memiliki akun? </label><label routerLink="/form-registration" routerDirection="forward" style="color: blue;"><b>Daftar</b></label>
+      <br><br>
+    </div>
+  </section>
+</ion-footer>

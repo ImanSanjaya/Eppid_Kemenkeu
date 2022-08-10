@@ -1,0 +1,104 @@
+<div *ngIf="!loading" class="loading-image" >
+  <ion-row>
+    <ion-col>
+        <img src="assets/escalade.gif" alt="Loading.." height="250px" />
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+        Mohon menunggu
+    </ion-col>
+  </ion-row>
+</div>
+
+<ion-header *ngIf="loading">
+  <table width=100%>
+    <tr>
+      <td><ion-icon class="icon-header" name="arrow-back" (click)="goBack()"></ion-icon></td>
+      <td><label style="font-size: large;color: white;"><b>Buat Permohonan Informasi</b></label></td>
+    </tr>
+  </table>
+</ion-header>
+
+<ion-content *ngIf="loading">
+	<div style="background-color:white;text-align: left;">
+    <br>
+    <label style="font-size: large;color: black;padding: 10px;"><b>Isi Data Permohonan</b></label>
+    <br><br>
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">PPID Tujuan <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select interface="action-sheet" [(ngModel)]="permohonan.KodeUnit" [ngModelOptions]="{standalone: true}">
+        <ion-select-option [value]="opt.KodeUnit" *ngFor="let opt of unitKerja" required>{{opt.NamaUnit}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Rincian Informasi Yang Dibutuhkan <ion-text color="danger">*</ion-text></ion-label>
+      <ion-textarea
+      [(ngModel)]="permohonan.IsiPermohonan" [ngModelOptions]="{standalone: true}">
+      </ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Tujuan Penggunaan Informasi <ion-text color="danger">*</ion-text></ion-label>
+      <ion-textarea
+        [(ngModel)]="permohonan.Tujuan" [ngModelOptions]="{standalone: true}">
+        </ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Cara Memperoleh Data <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select interface="action-sheet" [(ngModel)]="permohonan.CaraPerolehInfo" [ngModelOptions]="{standalone: true}">
+        <ion-select-option [value]="opt" *ngFor="let opt of caraMemperoleh">{{opt}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Cara Mendapatkan Data <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select interface="action-sheet" [(ngModel)]="permohonan.CaraDapatkanInfo" [ngModelOptions]="{standalone: true}">
+        <ion-select-option [value]="opt" *ngFor="let opt of caraMendapatkan">{{opt}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <div style="background-color:white;">
+        <br>
+        <label style="font-size: large;color: black;padding: 10px;"><b>Upload File Pelengkap</b></label>
+        <br><br>
+      </div>
+    </ion-row>
+    <ion-row>
+      <ion-list>
+        <ion-item lines="none">
+          
+          <div>
+            <label style="font-size: medium;color: black;">File Identitas <ion-text color="danger">*</ion-text></label><label style="font-size: small;color: lightslategrey;"> (jpeg, jpg, png, pdf; maks. 10MB)</label>
+            <br><br>
+            <ion-input type="file" (change)="setFileIdentitas($event)"></ion-input>
+            <br><br>
+          </div>
+        </ion-item>  
+        <ion-item lines="none">
+          <div>
+            <label style="font-size: medium;color: black;">File Pendukung </label><label style="font-size: small;color: lightslategrey;">(jpeg, jpg, png, pdf, doc, docx; maks 10MB)</label>
+            <br><br>
+            <ion-input type="file" (change)="setFilePendukung($event)"></ion-input>
+            <br><br>
+          </div>
+        </ion-item>  
+      </ion-list>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+    
+<ion-footer no-border *ngIf="loading">
+  <section class="full-width">
+    <ion-card expand="block" (click)="submit()">
+      <div style="background-color:#1c98ed;text-align: center;">
+        <br>
+        <label style="font-size: small;color: white;"><b><ion-icon slot="start" name="checkmark-circle-outline"></ion-icon> Ajukan</b></label>
+        <br><br>
+      </div>
+    </ion-card>
+  </section>
+</ion-footer>

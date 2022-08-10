@@ -1,0 +1,321 @@
+<div *ngIf="!loadRiwayatPermohonan && !loadRiwayatKeberatan" class="loading-image" >
+  <ion-row>
+    <ion-col>
+        <img src="assets/escalade.gif" alt="Loading.." height="250px" />
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+        Mohon menunggu.. <br/>kami sedang mengambil konten dari server
+    </ion-col>
+  </ion-row>
+</div>
+
+<ion-header>
+  <ion-toolbar class="primary-background-color">
+    <ion-buttons slot="end">
+    <ion-menu-button style="color: whitesmoke;"></ion-menu-button>
+    </ion-buttons>
+    <img src="assets/logo-kemenkeu-putih.png" class="logo-margin" height="60px" />
+  </ion-toolbar>
+  <br>
+</ion-header>
+
+<div *ngIf="loadRiwayatPermohonan && loadRiwayatKeberatan && loadBiodataPemohon">
+  <div [ngSwitch]="riwayatsegment">
+    <div *ngSwitchCase="'permohonanInformasiPublik'" style="background-color:#1c98ed;text-align: center;">
+      <br>
+      <label style="font-size: large;color: white;"><b>Permohonan Informasi Publik</b></label>
+      <br><br>
+    </div>
+    <div *ngSwitchCase="'pengajuanKeberatan'" style="background-color:#fcb813ff;text-align: center;">
+      <br>
+      <label style="font-size: large;color: white;"><b>Pengajuan Keberatan</b></label>
+      <br><br>
+    </div>
+    <ion-segment [(ngModel)]="riwayatsegment" value="permohonanInformasiPublik">
+      <ion-segment-button value="permohonanInformasiPublik">
+        <ion-label stacked class="my-label">Permohonan Informasi Publik</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="pengajuanKeberatan">
+        <ion-label stacked class="my-label">Pengajuan Keberatan</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+</div>
+
+<ion-content *ngIf="loadRiwayatPermohonan && loadRiwayatKeberatan && loadBiodataPemohon">
+
+  <div [ngSwitch]="riwayatsegment">
+    <div width=100% *ngSwitchCase="'permohonanInformasiPublik'">
+      <ion-list *ngFor="let permohonan of riwayatPermohonan">
+        <ion-item lines="none">
+          <ion-card *ngIf="statusPermohonan(permohonan.Status)" class="special-card" routerLink="/detail-permohonan/{{ permohonan.PermohonanId }}">
+            <div [style.background-color]="statusPermohonanInformasi.color">
+              <table width=100%>
+                <tr>
+                  <td><label style="font-size: small;color: white;"><b> #{{ permohonan.PermohonanId }}</b></label></td>
+                  <td align="right"><label style="font-size: small;color: white;"><b>{{ statusPermohonanInformasi.status }}</b></label></td>
+                </tr>
+              </table>
+            </div>
+            <table width=100%>
+              <tr>
+                <td>
+                  <label style="font-size: small;color: black;">
+                    Oleh {{ biodataPemohon['Nama'] }}
+                  </label>
+                </td>
+                <td align="right"><label style="font-size: small;color: black;">ID. {{ biodataPemohon['NIK'] }}</label></td>
+              </tr>
+            </table>
+            <hr style="height:2px;color:gray;background-color:gray">
+            <b>Pemohon {{ permohonan.JenisPemohon }}, dengan cara {{ permohonan.JalurPermohonan }}.</b>
+            
+            <br><br>
+
+            <b>Isi Permohonan : </b><br>        
+            {{ permohonan.IsiPermohonan }}  
+            
+            <br><br>
+
+            <b>Tujaun Permohonan : </b><br>        
+            {{ permohonan.Tujuan }}  
+
+            <div *ngIf="permohonan.FilePermohonan[0] && permohonan.FilePermohonan[1]">
+              <div *ngIf="permohonan.FilePermohonan[0].JenisFile != 'File Identitas'">
+                <br><br>
+
+                <b>Lampiran : </b><br> 
+                <ion-item>
+                    <ion-icon name="attach" slot="start"></ion-icon>
+                    <ion-label>
+                      <span style="font-size: 12px;">{{ permohonan.FilePermohonan[1].JenisFile }}</span><br/>
+                      <span style="font-size: 12px;">{{ permohonan.FilePermohonan[1].NamaFilePermohonan }}</span></ion-label>
+                </ion-item>
+                <br><br>
+
+                <b>Lampiran : </b><br> 
+                <ion-item>
+                    <ion-icon name="attach" slot="start"></ion-icon>
+                    <ion-label>
+                      <span style="font-size: 12px;">{{ permohonan.FilePermohonan[0].JenisFile }}</span><br/>
+                      <span style="font-size: 12px;">{{ permohonan.FilePermohonan[0].NamaFilePermohonan }}</span></ion-label>
+                </ion-item>
+              </div>
+            </div>
+
+            <div *ngIf="permohonan.FilePermohonan[0] && !permohonan.FilePermohonan[1]">
+
+              <div *ngIf="permohonan.FilePermohonan[0].JenisFile == 'File Identitas'">
+                <br><br>
+
+                <b>Lampiran : </b><br> 
+                <ion-item>
+                    <ion-icon name="attach" slot="start"></ion-icon>
+                    <ion-label>
+                      <span style="font-size: 12px;">{{ permohonan.FilePermohonan[0].JenisFile }}</span><br/>
+                      <span style="font-size: 12px;">{{ permohonan.FilePermohonan[0].NamaFilePermohonan }}</span></ion-label>
+                </ion-item>
+              </div>
+
+            </div>
+          </ion-card>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div width=100% *ngSwitchCase="'pengajuanKeberatan'">
+      <ion-list *ngFor="let keberatan of riwayatKeberatan">
+        <ion-item lines="none">
+          <ion-card *ngIf="statusKeberatan(keberatan.Status)" class="special-card" routerLink="/detail-keberatan/{{ keberatan.KeberatanId }}" routerDirection="forward">
+            <div [style.background-color]="statusPengajuanKeberatan.color">
+              <table width=100%>
+                <tr>
+                  <td><label style="font-size: small;color: white;"><b> #{{ keberatan.KeberatanId }}</b></label></td>
+                  <td *ngIf="statusKeberatan(keberatan.status)" align="right"><label style="font-size: small;color: white;"><b>{{ statusPengajuanKeberatan.status }}</b></label></td>
+                </tr>
+              </table>
+            </div>
+            <table width=100%>
+              <tr>
+                <td>
+                  <label style="font-size: small;color: black;">
+                    Oleh {{ keberatan.NamaPemohon }}
+                  </label>
+                </td>
+                <td align="right"><label style="font-size: small;color: black;">ID. {{ keberatan.NomorIdentitas }}</label></td>
+              </tr>
+            </table>
+            <hr style="height:2px;color:gray;background-color:gray">
+            <b>Pemohon {{ keberatan.JenisPemohon }}, dengan cara {{ keberatan.JalurKeberatan }}.</b>
+            
+            <br><br>
+
+            <b>Isi Keberatan : </b><br>        
+            {{ keberatan.AlasanKeberatan }}       
+
+            <div *ngIf="keberatan.FileKeberatan[0] && keberatan.FileKeberatan[1] && keberatan.FileKeberatan[2]">
+              <div *ngIf="keberatan.FileKeberatan[0].JenisFileKeberatan == 'BerkasPendukung'">
+                <br><br>
+
+                <b>Lampiran : </b><br> 
+                <ion-item>
+                    <ion-icon name="attach" slot="start"></ion-icon>
+                    <ion-label>
+                      <span style="font-size: 12px;">{{ FileIdentitasData }}</span><br/>
+                      <span style="font-size: 12px;">{{ keberatan.FileKeberatan[1].NamaFileKeberatan }}</span></ion-label>
+                </ion-item>
+                <br><br>
+
+                <b>Lampiran : </b><br> 
+                <ion-item>
+                    <ion-icon name="attach" slot="start"></ion-icon>
+                    <ion-label>
+                      <span style="font-size: 12px;">{{ BerkasPendukung }}</span><br/>
+                      <span style="font-size: 12px;">{{ keberatan.FileKeberatan[0].NamaFileKeberatan }}</span></ion-label>
+                </ion-item>
+                <br><br>
+
+                <b>Lampiran : </b><br> 
+                <ion-item>
+                    <ion-icon name="attach" slot="start"></ion-icon>
+                    <ion-label>
+                      <span style="font-size: 12px;">{{ SuratKuasa }}</span><br/>
+                      <span style="font-size: 12px;">{{ keberatan.FileKeberatan[2].NamaFileKeberatan }}</span></ion-label>
+                </ion-item>
+              </div>
+            </div>
+
+            <div *ngIf="keberatan.FileKeberatan[0] && keberatan.FileKeberatan[1] && !keberatan.FileKeberatan[2]">
+
+              <div *ngIf="keberatan.FileKeberatan[0].JenisFileKeberatan == 'FileIdentitasData'">
+                <br><br>
+
+                <b>Lampiran : </b><br> 
+                <ion-item>
+                    <ion-icon name="attach" slot="start"></ion-icon>
+                    <ion-label>
+                      <span style="font-size: 12px;">{{ FileIdentitasData }}</span><br/>
+                      <span style="font-size: 12px;">{{ keberatan.FileKeberatan[0].NamaFileKeberatan }}</span></ion-label>
+                </ion-item>
+                <br><br>
+
+                <b>Lampiran : </b><br> 
+                <ion-item>
+                    <ion-icon name="attach" slot="start"></ion-icon>
+                    <ion-label>
+                      <span style="font-size: 12px;">{{ SuratKuasa }}</span><br/>
+                      <span style="font-size: 12px;">{{ keberatan.FileKeberatan[1].NamaFileKeberatan }}</span></ion-label>
+                </ion-item>
+              </div>
+              <div *ngIf="keberatan.FileKeberatan[0].JenisFileKeberatan == 'BerkasPendukung'">
+                <br><br>
+
+                <b>Lampiran : </b><br> 
+                <ion-item>
+                    <ion-icon name="attach" slot="start"></ion-icon>
+                    <ion-label>
+                      <span style="font-size: 12px;">{{ FileIdentitasData }}</span><br/>
+                      <span style="font-size: 12px;">{{ keberatan.FileKeberatan[1].NamaFileKeberatan }}</span></ion-label>
+                </ion-item>
+                <br><br>
+
+                <b>Lampiran : </b><br> 
+                <ion-item>
+                    <ion-icon name="attach" slot="start"></ion-icon>
+                    <ion-label>
+                      <span style="font-size: 12px;">{{ BerkasPendukung }}</span><br/>
+                      <span style="font-size: 12px;">{{ keberatan.FileKeberatan[0].NamaFileKeberatan }}</span></ion-label>
+                </ion-item>
+              </div>
+
+            </div>
+
+            <div *ngIf="keberatan.FileKeberatan[0] && !keberatan.FileKeberatan[1] && !keberatan.FileKeberatan[2]">
+
+              <div *ngIf="keberatan.FileKeberatan[0].JenisFileKeberatan == 'FileIdentitasData'">
+                <br><br>
+
+                <b>Lampiran : </b><br> 
+                <ion-item>
+                    <ion-icon name="attach" slot="start"></ion-icon>
+                    <ion-label>
+                      <span style="font-size: 12px;">{{ FileIdentitasData }}</span><br/>
+                      <span style="font-size: 12px;">{{ keberatan.FileKeberatan[0].NamaFileKeberatan }}</span></ion-label>
+                </ion-item>
+              </div>
+
+            </div>
+
+          </ion-card>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>
+
+<!-- Awal - Menu Dibawah Jika User Belum Login -->
+
+<ion-content *ngIf="!isLogin()">
+  <div style="text-align: center;">
+    <br><br><br><br>
+    <label style="font-size: small;color: black;"><b>Untuk Melihat Riwayat<br> Anda Harus Login terlebih dahulu</b></label>
+    <br><br>
+  </div>
+</ion-content>
+
+<!-- Akhir - Menu Dibawah Jika User Belum Login -->
+
+<ion-footer no-border>
+
+  <div *ngIf="loadRiwayatPermohonan && loadRiwayatKeberatan && loadBiodataPemohon">
+    <div [ngSwitch]="riwayatsegment">
+      <section *ngSwitchCase="'permohonanInformasiPublik'" class="full-width">
+        <ion-card expand="block" routerLink="/form-biodata-pip" routerDirection="forward">
+          <div style="background-color:#1c98ed;text-align: center;">
+            <br>
+            <label style="font-size: small;color: white;"><b>Buat Permohonan Baru</b></label>
+            <br><br>
+          </div>
+        </ion-card>
+      </section>
+      <section *ngSwitchCase="'pengajuanKeberatan'" class="full-width">
+        <ion-card expand="block" routerLink="/form-biodata-pk" routerDirection="forward">
+          <div style="background-color:#fcb813ff;text-align: center;">
+            <br>
+            <label style="font-size: small;color: white;"><b>Buat Pengajuan Keberatan</b></label>
+            <br><br>
+          </div>
+        </ion-card>
+      </section>
+    </div>
+  </div>
+  
+  <div *ngIf="!isLogin()">
+    <br><br><br>
+
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button routerLink="/home" routerDirection="forward">
+          <ion-icon name="home"></ion-icon>
+          <ion-label>Beranda</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button routerLink="/all" routerDirection="forward">
+          <ion-icon name="list"></ion-icon>
+          <ion-label>Riwayat</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button *ngIf="!isLogin()" routerLink="/login" routerDirection="forward">
+          <ion-icon name="log-in"></ion-icon>
+          <ion-label>Login</ion-label>
+        </ion-tab-button>
+        <ion-tab-button *ngIf="isLogin()" routerLink="/view-account" routerDirection="forward">
+          <ion-icon name="person"></ion-icon>
+          <ion-label>Akun</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </div>
+
+</ion-footer>

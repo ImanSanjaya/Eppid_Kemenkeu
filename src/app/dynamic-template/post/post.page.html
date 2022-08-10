@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar class="primary-background-color">
+    <ion-buttons slot="end">
+    <ion-menu-button style="color: whitesmoke;"></ion-menu-button>
+    </ion-buttons>
+    <img src="assets/logo-kemenkeu-putih.png" class="logo-margin" height="60px" />
+  </ion-toolbar>
+  <br>
+</ion-header>
+<img src="/assets/curve-header-bottom.png" />
+<ion-content>
+
+  <div *ngIf="loading" class="loading-image" >
+    <ion-row>
+      <ion-col>
+          <img src="assets/escalade.gif" alt="Loading.." height="250px" />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+          Mohon menunggu.. <br/>kami sedang mengambil konten dari server
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-card *ngIf="!loading" class="std-margin">
+      <ion-card-header>
+        <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+        <ion-card-title color="primary">{{ title }}</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content color="primary">
+          <div scrollY="true" scrollX="true">
+              <img [src]="imageToShow"
+                width="100%"
+               alt="banner of PPID"
+               *ngIf="imageToShow" />
+            </div>
+
+          <div [innerHTML]="data.Content" id="content" class="inner-html"></div>
+      </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <br><br><br>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button routerLink="/home" routerDirection="forward">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Beranda</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button routerLink="/all" routerDirection="forward">
+        <ion-icon name="list"></ion-icon>
+        <ion-label>Riwayat</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button *ngIf="!isLogin()" routerLink="/login" routerDirection="forward">
+        <ion-icon name="log-in"></ion-icon>
+        <ion-label>Login</ion-label>
+      </ion-tab-button>
+      <ion-tab-button *ngIf="isLogin()" routerLink="/view-account" routerDirection="forward">
+        <ion-icon name="person"></ion-icon>
+        <ion-label>Akun</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+
+</ion-footer>

@@ -1,0 +1,35 @@
+<ion-content fullscreen class="ion-padding" scroll-y="false">
+
+  <div style="text-align: center;">
+
+    <ion-slides #slides pager="true" [options]="slideOpts" (ionSlideTap)="ionSlideChange(slides)" (ionSlideDidChange)="ionSlideChange(slides)">
+
+      <ion-slide>
+          <img src="/assets/img-sidebar-1.png"/>
+          <p><label style="font-size: x-large;">Hai Teman Transparansi</label><br><br> Selamat datang di aplikasi mobile <b>PPID</b> Kementerian Keuangan</p>
+          <p>Selangkah lagi, kamu bisa memanfaatkan fasilitas layanan Informasi Publik Kementerian Keuangan<br><br></p>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="/assets/img-sidebar-2.png"/>
+        <p>Ajukan permohonan Informasi Publik dan siapkan file identitas sebagai syarat kelengkapan</p>
+        <p>Dalam waktu 10 hari kerja + 7 hari kerja, kamu akan mendapatkan Pemberitahuan Tertulis yang merupakan jawaban atas permohonan Informasi Publik yang diajukan<br><br></p>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="/assets/img-sidebar-3.png"/>
+        <p>Jika kamu belum puas dengan Pemberitahuan Tertulis dari PPID <br> kamu dapat mengajukan keberatan</p>
+        <p>Tanggapan Keberatan akan disampaikan dalam jangka waktu paling lama 30 hari kerja<br><br></p>
+      </ion-slide>
+
+    </ion-slides>
+
+    <ion-button *ngIf="buttonName" class="tour-button" (click)="next()">
+      <div class="parent"> {{ buttonName }}</div>
+    </ion-button>
+  
+
+  </div>
+
+  
+</ion-content>

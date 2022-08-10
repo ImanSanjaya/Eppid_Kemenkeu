@@ -1,0 +1,89 @@
+<ion-app>
+    <ion-split-pane>
+      <ion-menu type="overlay" side="end">
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Menu</ion-title>
+          </ion-toolbar>
+        </ion-header>
+  
+        <ion-content>
+          <ion-menu-toggle >
+              <ion-item routerLink="/home" routerDirection="root" routerLinkActive="active">
+                <ion-icon name="home" slot="start"></ion-icon>
+                <ion-label>
+                  Beranda
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+            <ion-menu-toggle *ngIf="isLogin()">
+              <ion-item routerLink="/form-biodata-pip" routerDirection="forward" routerLinkActive="active">
+                <ion-icon name="document" slot="start"></ion-icon>
+                <ion-label>
+                  Permohonan Informasi
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+            <ion-menu-toggle *ngIf="isLogin()">
+              <ion-item routerLink="/form-biodata-pk" routerDirection="forward" routerLinkActive="active">
+                <ion-icon name="document" slot="start"></ion-icon>
+                <ion-label>
+                  Pengajuan Keberatan
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+          <div *ngFor="let p of menus">    
+            <!-- Standard Menu Item -->
+            <ion-menu-toggle *ngIf="p.Items?.length === 0">
+              <ion-item [routerLink]="dynamicLink(p.Name, p.Link)" routerDirection="root" routerLinkActive="active">
+                <ion-icon [name]="p.Icon" slot="start"></ion-icon>
+                <ion-label>
+                  {{ p.Name }}
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            <!-- Item with Children -->
+      
+            <ion-item button *ngIf="p.Items?.length > 0" (click)="p.open = !p.open" [class.parent-active]="p.open" detail="false">
+              <ion-icon slot="start" name="arrow-forward" *ngIf="!p.open"></ion-icon>
+              <ion-icon slot="start" name="arrow-down" *ngIf="p.open"></ion-icon>
+              <ion-label>{{ p.Name }}</ion-label>
+            </ion-item>
+      
+            <!-- Children List for clicked Item -->
+            <ion-list *ngIf="p.open">
+              <ion-menu-toggle>
+                <ion-item *ngFor="let sub of p.Items" class="sub-item" [routerLink]="dynamicLink(sub.Name, sub.Link)" routerDirection="root" routerLinkActive="active">
+                  <ion-icon [name]="sub.Icon" slot="start"></ion-icon>
+                  <ion-label>
+                    {{ sub.Name }}
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-list>
+          </div>
+
+          <ion-menu-toggle *ngIf="!isLogin()">
+            <ion-button style="width: 90%; margin: 15px 15px 15px 15px;" routerLink="login" routerDirection="forward" routerLinkActive="active">
+              <ion-icon slot="end" name="key"></ion-icon>
+              Login
+            </ion-button>
+          </ion-menu-toggle>
+          <ion-menu-toggle *ngIf="isLogin()">
+              <ion-button style="width: 90%; margin: 15px 15px 15px 15px;" routerLink="logout" routerDirection="forward" routerLinkActive="active">
+                <ion-icon slot="end" name="key"></ion-icon>
+                Logout
+              </ion-button>
+            </ion-menu-toggle>
+
+        </ion-content>
+  
+      </ion-menu>
+  
+      <ion-router-outlet main></ion-router-outlet>
+      
+    </ion-split-pane>
+  </ion-app>

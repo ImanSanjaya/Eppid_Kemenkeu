@@ -1,0 +1,49 @@
+<ion-header>
+  <table width=100%>
+    <tr>
+      <td><ion-icon class="icon-header" name="arrow-back" (click)="goBack()"></ion-icon></td>
+      <td><label style="font-size: large;color: white;"><b>Ubah Data Akun</b></label></td>
+    </tr>
+  </table>
+</ion-header>
+
+<ion-content>
+  <br>
+  <ion-item>
+    <ion-label position="stacked">Nama Lengkap <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input [(ngModel)]="biodata.Nama" [ngModelOptions]="{standalone: true}" ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">NPWP </ion-label>
+    <ion-input [(ngModel)]="biodata.NPWP" [ngModelOptions]="{standalone: true}" ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Pekerjaan <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input [(ngModel)]="biodata.Pekerjaan" [ngModelOptions]="{standalone: true}" ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Alamat <ion-text color="danger">*</ion-text></ion-label>
+    <ion-textarea [(ngModel)]="biodata.Alamat" [ngModelOptions]="{standalone: true}" ></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">No Telepon <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input type="number" [(ngModel)]="biodata.Telp" [ngModelOptions]="{standalone: true}" ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Keterangan</ion-label>
+    <ion-textarea [(ngModel)]="biodata.Keterangan" [ngModelOptions]="{standalone: true}" ></ion-textarea>
+  </ion-item>
+  
+</ion-content>
+    
+<ion-footer no-border>
+  <section class="full-width">
+    <ion-card expand="block" (click)="submit()">
+      <div style="background-color:#005FAC;text-align: center;">
+        <br>
+        <label style="font-size: small;color: white;"><b>Simpan</b></label>
+        <br><br>
+      </div>
+    </ion-card>
+  </section>
+</ion-footer>
